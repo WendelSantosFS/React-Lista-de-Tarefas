@@ -1,0 +1,17 @@
+#formDefault {
+    background-color: aquamarine;
+    min-height: 400px;
+    width: 500px;
+    padding: 0.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.inputTop  {
+    display: flex;
+    gap: .4rem;
+}
+.inputTop input[type="text"]  {
+    width: 100%;
+    min-height: 30px;
+    font-size: 17px;
+}
