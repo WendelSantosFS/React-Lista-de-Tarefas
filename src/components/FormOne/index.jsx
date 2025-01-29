@@ -1,10 +1,13 @@
 import { useState } from "react"
 import styles from './styles.module.css'
+import useFunctionsBtn from "../../hooks/useFunctionsBtn"
 
 export default function FormOne () {
     const [tasks, setTasks] = useState('')
     let arrayTasks = localStorage.getItem('react-tasks')
     arrayTasks = arrayTasks ? JSON.parse(arrayTasks) : []
+
+    const {funcDeleteElement} = useFunctionsBtn()
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
@@ -20,6 +23,8 @@ export default function FormOne () {
         console.log(arrayTasks)
         return setTasks('')
     }
+
+    
 
     return (
         <div id={styles.formDefault}>
@@ -41,14 +46,21 @@ export default function FormOne () {
                     
                 </div>
 
-                <div>
+                <div id="renderTasks">
                     <h2>Tarefas Pendentes:</h2>
 
                     {arrayTasks.length === 0 ?
                     <h3>Sem tarefas para fazer!</h3> :
                     arrayTasks.map( (result) => (
-                        <div key={result.id}>
-                            <p>{result.task}</p>
+                        <div id={result.id} key={result.id}>
+                            <p className={styles.completed}>{result.task}</p>
+
+                            <button 
+                                type="button"
+                                onClick={ funcDeleteElement }
+                            >X
+                            </button>
+                            <button type="button">ED</button>
                         </div>
                     ))
                     }
