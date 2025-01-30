@@ -1,5 +1,4 @@
 export default function useFunctionsBtn () {
-
     const funcDeleteElement = (ev) => {
             const currentBtn = +ev.currentTarget.parentNode.id
             let array = localStorage.getItem('react-tasks')
@@ -12,7 +11,7 @@ export default function useFunctionsBtn () {
             console.log(newVarValue)
             localStorage.setItem('react-tasks', JSON.stringify(newVarValue))
 
-            principalDiv.removeChild(ev.currentTarget.parentNode)
+            //principalDiv.removeChild(ev.currentTarget.parentNode)
         }
 
     return {funcDeleteElement}

@@ -1,13 +1,30 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import styles from './styles.module.css'
-import useFunctionsBtn from "../../hooks/useFunctionsBtn"
 
 export default function FormOne () {
     const [tasks, setTasks] = useState('')
-    let arrayTasks = localStorage.getItem('react-tasks')
-    arrayTasks = arrayTasks ? JSON.parse(arrayTasks) : []
+    const [arrayTasks, setArrayTasks] = useState( ()=>{
+        if (localStorage.getItem('react-tasks')) {
+            return JSON.parse(localStorage.getItem('react-tasks'))
+        } else {
+            return []
+        }
+    } )
+    
+    function DeleteTask (ev) {
+        const currentBtn = +ev.currentTarget.parentNode.id
+        let array = localStorage.getItem('react-tasks')
+        array = array ? JSON.parse(array): []
 
-    const {funcDeleteElement} = useFunctionsBtn()
+        const principalDiv = document.getElementById('renderTasks')
+        console.log(currentBtn)
+
+        const newVarValue = array.filter( (task) => task.id !== currentBtn)
+        console.log(newVarValue)
+        localStorage.setItem('react-tasks', JSON.stringify(newVarValue));
+
+        setArrayTasks(newVarValue)
+    }    
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
@@ -49,20 +66,22 @@ export default function FormOne () {
                 <div id="renderTasks">
                     <h2>Tarefas Pendentes:</h2>
 
-                    {arrayTasks.length === 0 ?
-                    <h3>Sem tarefas para fazer!</h3> :
-                    arrayTasks.map( (result) => (
-                        <div id={result.id} key={result.id}>
-                            <p className={styles.completed}>{result.task}</p>
-
-                            <button 
-                                type="button"
-                                onClick={ funcDeleteElement }
-                            >X
-                            </button>
-                            <button type="button">ED</button>
-                        </div>
-                    ))
+                    {
+                        arrayTasks.length === 0 ?
+                        <h3>Sem tarefas para fazer!</h3> :
+                        arrayTasks.map( (result) => (
+                            <div id={result.id} key={result.id}>
+                                <p className=''>{result.task}</p>
+                
+                                <button 
+                                    type="button"
+                                    onClick={ DeleteTask }
+                                >X
+                                </button>
+                                <button type="button">ED</button>
+                            </div>
+                            )
+                        )
                     }
                 </div>
                 
@@ -72,3 +91,14 @@ export default function FormOne () {
         </div>
     )
 }
+
+
+/*
+    let arrayTasks = localStorage.getItem('react-tasks')
+    arrayTasks = arrayTasks ? JSON.parse(arrayTasks) : []
+
+
+    const [arrayTasks, setArrayTasks] = useState(
+        arrayTasks = setArrayTasks(JSON.parse(arrayTasks)): []
+    )
+*/
