@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 
 export default function FormOne () {
     const [tasks, setTasks] = useState('')
+
     const [arrayTasks, setArrayTasks] = useState( ()=>{
         if (localStorage.getItem('react-tasks')) {
             return JSON.parse(localStorage.getItem('react-tasks'))
@@ -53,7 +54,8 @@ export default function FormOne () {
 
                     <div className={styles.inputTop}>
                         <input
-                            type="text" 
+                            type="text"
+                            required
                             id="task"
                             value={tasks}
                             onChange={ (ev) => setTasks(ev.target.value)}
