@@ -72,10 +72,10 @@ export default function FormOne () {
                         arrayTasks.length === 0 ?
                         <h3>Sem tarefas para fazer!</h3> :
                         arrayTasks.map( (result) => (
-                            <div id={result.id} key={result.id}>
+                            <div className={styles.divTasks} id={result.id} key={result.id}>
                                 <p className=''>{result.task}</p>
                 
-                                <button 
+                                <button
                                     type="button"
                                     onClick={ DeleteTask }
                                 >X
