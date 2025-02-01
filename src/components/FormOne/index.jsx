@@ -17,11 +17,7 @@ export default function FormOne () {
         let array = localStorage.getItem('react-tasks')
         array = array ? JSON.parse(array): []
 
-        const principalDiv = document.getElementById('renderTasks')
-        console.log(currentBtn)
-
         const newVarValue = array.filter( (task) => task.id !== currentBtn)
-        console.log(newVarValue)
         localStorage.setItem('react-tasks', JSON.stringify(newVarValue));
 
         setArrayTasks(newVarValue)
@@ -36,9 +32,7 @@ export default function FormOne () {
         }
         arrayTasks.unshift(newTask)
 
-        console.log('nova tarefa')
         localStorage.setItem('react-tasks', JSON.stringify(arrayTasks))
-        console.log(arrayTasks)
         return setTasks('')
     }
 
@@ -60,7 +54,11 @@ export default function FormOne () {
                             value={tasks}
                             onChange={ (ev) => setTasks(ev.target.value)}
                         />
-                        <button type="submit">Enviar</button>
+                       
+                        <button type="submit">
+                            <img src="../../public/mais.png" alt=""/>
+                        </button>
+
                     </div>
                     
                 </div>
@@ -73,14 +71,19 @@ export default function FormOne () {
                         <h3>Sem tarefas para fazer!</h3> :
                         arrayTasks.map( (result) => (
                             <div className={styles.divTasks} id={result.id} key={result.id}>
-                                <p className=''>{result.task}</p>
+                                <p>{result.task}</p>
                 
-                                <button
-                                    type="button"
-                                    onClick={ DeleteTask }
-                                >X
-                                </button>
-                                <button type="button">ED</button>
+                                <i onClick={ DeleteTask }>
+                                    <img src="../../public/excluir.png" alt="Excluir tarefa" />
+                                </i>
+
+                                <i>
+                                    <img src="../../public/editar.png" alt="" />
+                                </i>
+
+                                <i>
+                                    <img src="../../public/completado.png" alt="" />
+                                </i>
                             </div>
                             )
                         )
@@ -103,4 +106,7 @@ export default function FormOne () {
     const [arrayTasks, setArrayTasks] = useState(
         arrayTasks = setArrayTasks(JSON.parse(arrayTasks)): []
     )
+
+
+    
 */
