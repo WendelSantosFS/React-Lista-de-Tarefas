@@ -28,18 +28,14 @@
     height: 42px;
 }
 
-.paragraph {
-    text-decoration: line-through;
-}
 .divTasks {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
-    gap: 3px;
     padding: 0 3px 0 3px;
     border: 2px solid rgb(123, 122, 123);
-    margin: 5px auto;
+    margin: 4px auto;
 }
 .divTasks p {
     width: 100%;

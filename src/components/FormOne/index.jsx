@@ -56,7 +56,7 @@ export default function FormOne () {
                         />
                        
                         <button type="submit">
-                            <img src="../../public/mais.png" alt=""/>
+                            <img src="/mais.png" alt="" title="Adicionar tarefa"/>
                         </button>
 
                     </div>
@@ -73,17 +73,32 @@ export default function FormOne () {
                             <div className={styles.divTasks} id={result.id} key={result.id}>
                                 <p>{result.task}</p>
                 
-                                <i onClick={ DeleteTask }>
-                                    <img src="../../public/excluir.png" alt="Excluir tarefa" />
-                                </i>
+                                    <i onClick={ DeleteTask }>
+                                        <img src="/excluir.png" alt="Excluir tarefa" title="Excluir tarefa"/>
+                                    </i>
 
-                                <i>
-                                    <img src="../../public/editar.png" alt="" />
-                                </i>
+                                    <i>
+                                        <img 
+                                            src="/editar.png" 
+                                            alt="Editar tarefa" 
+                                            title="Editar tarefa"
+                                        />
+                                    </i>
 
-                                <i>
-                                    <img src="../../public/completado.png" alt="" />
-                                </i>
+                                    <i
+                                        onClick={ (ev)=> {
+                                            let div = ev.currentTarget.parentElement
+                                            const p = div.querySelector('p')
+                                            p.classList.toggle('pCompleted')
+
+                                        }}
+                                    >
+                                        <img 
+                                            src="/completado.png" 
+                                            alt="Completar tarefa" 
+                                            title="Completar tarefa"
+                                        />
+                                    </i>                                
                             </div>
                             )
                         )

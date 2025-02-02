@@ -5,3 +5,8 @@ body {
     display: flex;
     justify-content: center;
 }
+
+.pCompleted {
+    text-decoration: line-through;
+    background-color: rgb(5, 225, 5);
+}
