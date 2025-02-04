@@ -10,3 +10,12 @@ body {
     text-decoration: line-through;
     background-color: rgb(5, 225, 5);
 }
+.none {
+    display: none;
+}
+.inputForText {
+    width: 95%;
+    height: 25px;
+    font-size: 18px;
+    margin: 0 5px;
+}

@@ -71,13 +71,96 @@ export default function FormOne () {
                         <h3>Sem tarefas para fazer!</h3> :
                         arrayTasks.map( (result) => (
                             <div className={styles.divTasks} id={result.id} key={result.id}>
-                                <p>{result.task}</p>
-                
-                                    <i onClick={ DeleteTask }>
+
+                                    <p>{result.task}</p>
+                                
+                                    <i className="icons" onClick={ DeleteTask }>
                                         <img src="/excluir.png" alt="Excluir tarefa" title="Excluir tarefa"/>
                                     </i>
 
-                                    <i>
+                                    <i
+                                        className="icons"
+                                        onClick={ (ev) => {
+                                            const principal = ev.currentTarget.parentElement
+                                            const p = principal.querySelector('p')
+                                            const valueP = p.innerText
+                                            
+                                            const icons = principal.querySelectorAll('.icons')
+
+                                            p.classList.toggle('none')
+                                            icons.forEach( (btn) => btn.classList.toggle('none'))
+
+                                            const input = document.createElement('input')
+                                            input.id = 'inputValue'
+                                            input.type = 'text'
+                                            input.value = valueP
+                                            input.focus()
+
+                                            const btnCancel = document.createElement('i')
+                                            const imgCancel = document.createElement('img')
+                                            imgCancel.src = '/cancelar.png'
+                                            imgCancel.alt = 'Cancelar alteração'
+                                            imgCancel.title = 'Cancelar alteração'
+                                            imgCancel.className = 'cancelAndSave'
+                                            btnCancel.onclick = ()=> {
+                                                p.classList.toggle('none')
+                                                icons.forEach( (btn) => btn.classList.toggle('none'))
+
+                                                input.remove()
+                                                btnCancel.remove()
+                                                btnSave.remove()
+                                            }
+
+                                            const btnSave = document.createElement('i')
+                                            const imgSave = document.createElement('img')
+                                            imgSave.src = '/completado.png'
+                                            imgSave.alt = 'Salvar alteração'
+                                            imgSave.title = 'Salvar alteração'
+                                            imgSave.className = 'cancelAndSave'
+                                            btnSave.onclick = () => {
+                                                const valueOld = valueP
+                                                let array = localStorage.getItem('react-tasks')
+                                                array = array ? JSON.parse(array) : []
+
+                                                function indexArray (value, index, array) {
+                                                    return value.task === valueOld
+                                                }
+                                                
+                                                const indexOldValue = Number(array.findIndex(indexArray))
+                                                const currentInput = document.getElementById('inputValue').value
+
+                                                const newTask = {
+                                                    id: result.id, task: currentInput
+                                                }
+
+                                                const newArray = array.map( (value) => {
+                                                    if (value.id !== result.id) {
+                                                        return value
+                                                    } else {
+                                                        return {id: result.id, task: currentInput}
+                                                    }
+                                                } )
+
+                                                localStorage.setItem('react-tasks', JSON.stringify(newArray))
+                                                setArrayTasks(newArray)
+                                                
+                                                p.classList.toggle('none')
+                                                icons.forEach( (btn) => btn.classList.toggle('none'))
+
+                                                input.remove()
+                                                btnCancel.remove()
+                                                btnSave.remove()
+                                                
+
+                                            }
+
+                                            btnCancel.appendChild(imgCancel)
+                                            btnSave.appendChild(imgSave)
+
+                                            principal.append(input, btnCancel, btnSave)
+                                            
+                                        } }
+                                    >
                                         <img 
                                             src="/editar.png" 
                                             alt="Editar tarefa" 
@@ -86,11 +169,11 @@ export default function FormOne () {
                                     </i>
 
                                     <i
+                                        className="icons"
                                         onClick={ (ev)=> {
                                             let div = ev.currentTarget.parentElement
                                             const p = div.querySelector('p')
                                             p.classList.toggle('pCompleted')
-
                                         }}
                                     >
                                         <img 
@@ -98,7 +181,7 @@ export default function FormOne () {
                                             alt="Completar tarefa" 
                                             title="Completar tarefa"
                                         />
-                                    </i>                                
+                                    </i>  
                             </div>
                             )
                         )
@@ -114,14 +197,5 @@ export default function FormOne () {
 
 
 /*
-    let arrayTasks = localStorage.getItem('react-tasks')
-    arrayTasks = arrayTasks ? JSON.parse(arrayTasks) : []
-
-
-    const [arrayTasks, setArrayTasks] = useState(
-        arrayTasks = setArrayTasks(JSON.parse(arrayTasks)): []
-    )
-
-
-    
+    const indexOldValue = array.indexOf( (value)=> value.task === valueOld) + 1
 */

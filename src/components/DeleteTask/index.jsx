@@ -13,8 +13,3 @@ export default function DeleteTask (ev) {
 
     principalDiv.removeChild(ev.currentTarget.parentNode)
 }
-
-/*
-    let array = localStorage.getItem('react-tasks')
-    array = array ? JSON.parse(array): []
-*/

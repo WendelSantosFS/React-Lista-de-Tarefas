@@ -37,8 +37,9 @@
     border: 2px solid rgb(123, 122, 123);
     margin: 4px auto;
 }
-.divTasks p {
+.divTasks p, .divTasks input {
     width: 100%;
+    margin: 0 3px;
     line-height: 18px;
 }
 .divTasks i img {
@@ -47,4 +48,13 @@
     padding: 3px;
     border-radius: 5px;
     border: 1px solid #675d5d;
+}
+
+.divTasks button {
+    background-color: transparent;
+}
+
+
+.none {
+    display: none;
 }
