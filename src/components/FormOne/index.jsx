@@ -5,8 +5,7 @@ import useFormFnc from "../../hooks/useFormFnc"
 export default function FormOne () {
     const [tasks, setTasks] = useState('')
     const chaveLocalStorage = 'react-tasks'
-    const { DeleteTask } = useFormFnc()
-
+    
     const [arrayTasks, setArrayTasks] = useState( ()=>{
         if (localStorage.getItem(chaveLocalStorage)) {
             return JSON.parse(localStorage.getItem('react-tasks'))
@@ -15,21 +14,14 @@ export default function FormOne () {
         }
     } )
     
-       
+    const { DeleteTask, addTask } = useFormFnc(arrayTasks, setArrayTasks)
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
-
-        const newTask = {
-            id: Math.floor(Math.random() * 1000000),
-            task: tasks
-        }
-        arrayTasks.unshift(newTask)
-
-        localStorage.setItem('react-tasks', JSON.stringify(arrayTasks))
+    
+        addTask(tasks, chaveLocalStorage)
         return setTasks('')
     }
-    
 
     return (
         <div id={styles.formDefault}>
@@ -66,9 +58,9 @@ export default function FormOne () {
 
                                 <p>{result.task}</p>
                                 <i
-                                    className="icons" 
+                                    className="icons"
                                     onClick={
-                                        () => DeleteTask(result.id, arrayTasks, chaveLocalStorage, setArrayTasks)
+                                        () => DeleteTask(result.id, chaveLocalStorage)
                                     }
                                 >
                                     <img src="/excluir.png" alt="Excluir tarefa" title="Excluir tarefa"/>
@@ -138,14 +130,12 @@ export default function FormOne () {
                                             btnCancel.remove()
                                             btnSave.remove()
                                             
-
                                         }
 
                                         btnCancel.appendChild(imgCancel)
                                         btnSave.appendChild(imgSave)
 
                                         principal.append(input, btnCancel, btnSave)
-                                        
                                     } }
                                 >
                                     <img 

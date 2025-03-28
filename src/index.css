@@ -4,6 +4,7 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: #6d5757;
 }
 
 .pCompleted {
