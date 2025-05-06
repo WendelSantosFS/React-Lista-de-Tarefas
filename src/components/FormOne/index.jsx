@@ -28,6 +28,7 @@ export default function FormOne () {
             <h1>Lista de Tarefas</h1>
             
             <form onSubmit={handleSubmit}>
+                
                 <div>
                     <label htmlFor="task">Tarefa:</label>
 
@@ -43,9 +44,7 @@ export default function FormOne () {
                         <button type="submit">
                             <img src="/mais.png" alt="" title="Adicionar tarefa"/>
                         </button>
-
                     </div>
-                    
                 </div>
 
                 <div id="renderTasks">
