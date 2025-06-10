@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import useFormFnc from "../../hooks/useFormFnc"
 import DeleteTaskIcon from "../DeleteTaskIcon"
 import EditTaskIcon from "../EditTaskIcon"
+import CompleteTaskIcon from "../CompleteTaskIcon"
 
 export default function FormOne () {
     const [tasks, setTasks] = useState('')
@@ -63,20 +64,7 @@ export default function FormOne () {
                                 
                                 <EditTaskIcon array={arrayTasks} id={result.id} setArrayTasks={setArrayTasks}/>
 
-                                <i
-                                    className="icons"
-                                    onClick={ (ev)=> {
-                                        let div = ev.currentTarget.parentElement
-                                        const p = div.querySelector('p')
-                                        p.classList.toggle('pCompleted')
-                                    }}
-                                >
-                                    <img 
-                                        src="/completado.png" 
-                                        alt="Completar tarefa" 
-                                        title="Completar tarefa"
-                                    />
-                                </i>  
+                                <CompleteTaskIcon />
                             </div>
                             )
                         )
@@ -89,3 +77,8 @@ export default function FormOne () {
         </div>
     )
 }
+
+
+/*
+    Tem funções em: Hooks > DeleteTask    &&  DeleteTaskIcon
+*/
