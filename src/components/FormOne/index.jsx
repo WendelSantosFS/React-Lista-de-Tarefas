@@ -1,6 +1,7 @@
 import { useState } from "react"
 import styles from './styles.module.css'
 import useFormFnc from "../../hooks/useFormFnc"
+import DeleteTaskIcon from "../DeleteTaskIcon"
 
 export default function FormOne () {
     const [tasks, setTasks] = useState('')
@@ -56,14 +57,9 @@ export default function FormOne () {
                             <div className={styles.divTasks} id={result.id} key={result.id}>
 
                                 <p>{result.task}</p>
-                                <i
-                                    className="icons"
-                                    onClick={
-                                        () => DeleteTask(result.id, chaveLocalStorage)
-                                    }
-                                >
-                                    <img src="/excluir.png" alt="Excluir tarefa" title="Excluir tarefa"/>
-                                </i>
+
+                                <DeleteTaskIcon array={arrayTasks} setArray={setArrayTasks} id={result.id} keyStorage={chaveLocalStorage}/>
+                                
 
                                 <i
                                     className="icons"
