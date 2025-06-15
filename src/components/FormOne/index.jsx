@@ -9,7 +9,7 @@ export default function FormOne () {
     const [tasks, setTasks] = useState('')
     const chaveLocalStorage = 'react-tasks'
     
-    const [arrayTasks, setArrayTasks] = useState( ()=>{
+    let [arrayTasks, setArrayTasks] = useState( ()=>{
         if (localStorage.getItem(chaveLocalStorage)) {
             return JSON.parse(localStorage.getItem('react-tasks'))
         } else {
@@ -17,7 +17,7 @@ export default function FormOne () {
         }
     } )
     
-    const { DeleteTask, addTask } = useFormFnc(arrayTasks, setArrayTasks)
+    const { addTask } = useFormFnc(arrayTasks, setArrayTasks)
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
@@ -58,13 +58,13 @@ export default function FormOne () {
                         arrayTasks.map( (result) => (
                             <div className={styles.divTasks} id={result.id} key={result.id}>
 
-                                <p>{result.task}</p>
+                                <p className={result.status}>{result.task}</p>
 
                                 <DeleteTaskIcon array={arrayTasks} setArray={setArrayTasks} id={result.id} keyStorage={chaveLocalStorage}/>
                                 
                                 <EditTaskIcon array={arrayTasks} id={result.id} setArrayTasks={setArrayTasks}/>
 
-                                <CompleteTaskIcon />
+                                <CompleteTaskIcon array={arrayTasks} setArray={setArrayTasks} id={result.id} keyString={chaveLocalStorage}/>
                             </div>
                             )
                         )

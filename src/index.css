@@ -24,3 +24,11 @@ body {
     font-size: 18px;
     margin: 0 5px;
 }
+
+
+
+/* STATUS DAS TASKS - COLOR*/
+.done {
+    color: rgb(5, 225, 5);
+    text-decoration: line-through;
+}
